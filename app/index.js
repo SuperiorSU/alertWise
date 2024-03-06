@@ -1,14 +1,28 @@
-import { View, Text } from 'react-native'
-import React from 'react'
+import React from 'react';
+import { View, StyleSheet,Text } from 'react-native';
+import MessageInput from './MessageInput';
+import { Link } from 'expo-router';
 
 const index = () => {
   return (
-    <View>
-      <Text className="text-[32px] font-bold p-5 bg-purple-700 text-white">
-        Hello User. This is test text.
-      </Text>
+    <View style={styles.container}>
+      <MessageInput />
+      <View className="pt-3 pb-2"></View>
+      <Link href="./home">
+        <View className="bg-red-500 p-3">
+          <Text className="text-white font-semibold">Click here</Text>
+        </View>
+      </Link>
     </View>
-  )
-}
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+});
 
 export default index

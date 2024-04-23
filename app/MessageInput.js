@@ -7,14 +7,14 @@ const MessageInput = () => {
   const [message, setMessage] = useState('');
   const [prediction, setPrediction] = useState(null);
   const [isModalVisible, setIsModalVisible] = useState(false)
-  const changeChangeHandler = (e)=>{
-    setMessage({...message,[e.traget.name]:e.target.value})
+  const changeHandler = (text) => {
+    setMessage(text);
   }
-  let isSpam =0;
+  let isSpam = 0;
   const sendMessage = async () => {
    
     try {
-      const response = await axios.post('http://127.0.0.1:5000/predict', message);
+      const response = await axios.post('http://192.168.0.115:5000/predict', { message });
       const result = await response.data.prediction;
       setPrediction(result);
       console.log(prediction)
@@ -26,6 +26,10 @@ const MessageInput = () => {
       console.error('Error:', error);
     }
   };
+
+  const handleModal = () => {
+    setIsModalVisible(false);
+  }
 
   return (
     <View>
@@ -42,10 +46,12 @@ const MessageInput = () => {
       }
       
       <TextInput
+      name="message"
+      value={message}
         placeholder="Type your message here"
         className="flex-wrap flex"
-        value={message}
-        onChangeText={setMessage}
+       
+        onChangeText={changeHandler}
       />
       <Button
         title="Predict"

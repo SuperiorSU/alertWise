@@ -6,21 +6,19 @@ import Modal from "react-native-modal";
 const MessageInput = () => {
   const [message, setMessage] = useState('');
   const [prediction, setPrediction] = useState(null);
-  const [isModalVisible, setIsModalVisible] = useState(false)
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
   const changeHandler = (text) => {
     setMessage(text);
-  }
-  let isSpam = 0;
+  };
+
   const sendMessage = async () => {
-   
     try {
-      const response = await axios.post('http://192.168.0.115:5000/predict', { message });
+      const response = await axios.post('http://192.168.138.173:5000/predict', { message });
       const result = await response.data.prediction;
       setPrediction(result);
-      console.log(prediction)
-      if(prediction==='spam'){
-        isSpam = 1;
-        setIsModalVisible(true)
+      if (result === "spam") {
+        setIsModalVisible(true);
       }
     } catch (error) {
       console.error('Error:', error);
@@ -29,28 +27,20 @@ const MessageInput = () => {
 
   const handleModal = () => {
     setIsModalVisible(false);
-  }
+  };
 
   return (
     <View>
-      
-      {
-        isSpam?(<Modal isVisible={isModalVisible}>
-      <View style={{ flex: 1 }}>
-          <Text className="text-red-700 font-bold text-[18px]">Alert! Its a Spam Message</Text>
+      <Modal isVisible={isModalVisible}>
+        <View style={{ flex: 1 }}>
+          <Text style={{ color: 'red', fontWeight: 'bold', fontSize: 18 }}>Alert! It's a Spam Message</Text>
           <Button title="Hide modal" onPress={handleModal} />
         </View>
-      </Modal>):(
-        <></>
-      )
-      }
+      </Modal>
       
       <TextInput
-      name="message"
-      value={message}
+        value={message}
         placeholder="Type your message here"
-        className="flex-wrap flex"
-       
         onChangeText={changeHandler}
       />
       <Button

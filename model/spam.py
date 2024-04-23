@@ -8,7 +8,7 @@ from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)
 # Load data
-data = pd.read_csv('c:/Users/sujal/OneDrive/Desktop/Inhouse-code/alertWise/model/data/spam.csv', encoding='latin1')
+data = pd.read_csv('e:/Coding-All/projectsAll_and_hackathons/alertWise/model/data/spam.csv', encoding='latin1')
 
 # Separate features and target
 X = data['v2']

@@ -31,9 +31,9 @@ const MessageInput = () => {
 
   return (
     <View>
-      <Modal isVisible={isModalVisible}>
+      <Modal isVisible={isModalVisible} hasBackdrop={true} animationIn="slideInLeft" className="bg-white shadow w-[250px] h-[100px] shadow-black absolute top-[300px] left-[50px] p-4 rounded-sm"   >
         <View style={{ flex: 1 }}>
-          <Text style={{ color: 'red', fontWeight: 'bold', fontSize: 18 }}>Alert! It's a Spam Message</Text>
+          <Text style={{ color: 'red', fontWeight: 'bold', fontSize: 18 , textAlign: 'center', marginBottom:'' }}>Alert! It's a Spam Message</Text>
           <Button title="Hide modal" onPress={handleModal} />
         </View>
       </Modal>
